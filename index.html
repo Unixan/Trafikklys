@@ -15,27 +15,72 @@
 </head>
 
 <body class="body">
-    <div id="app"></div>
+    <div id="app" class="main"></div>
     <script>
         //Model
-
+        let topColor = 'noLight';
+        let middleColor = 'noLight';
+        let bottomColor = 'noLight';
+        let automation = 'autoLight()';
+        let automationText = 'Auto';
         //View
         view();
         function view() {
             document.getElementById("app").innerHTML = /*HTML*/`
-            <div class="house">
-                <div id="red" class="lights noLight"></div>    
-                <div id="yellow" class="lights noLight"></div>    
-                <div id="red" class="lights noLight"></div>    
-            </div>
-            <div>
-                <button onclick="redLight()">Rødt!</button>
-                <button onclick="changeLight()">Bytt!</button>
-                <button onclick="greenLight()">Kjør!</button>
-            </div>
+                <div class="house">
+                    <div id="red" class="lights ${topColor}"></div>    
+                    <div id="yellow" class="lights ${middleColor}"></div>    
+                    <div id="red" class="lights ${bottomColor}"></div>    
+                </div>
+                <div class="buttons">
+                    <div class="button" onclick="redLight()">Stopp!</div>
+                    <div class="button" onclick="changeLight()">Bytt!</div>
+                    <div class="button" onclick="greenLight()">Kjør!</div>
+                    <div class="button" onclick="toRedLight()">Stopp snart!</div>
+                    <div class="button" onclick="${automation}">${automationText}</div>
+
+                </div>
+            
     `
         }
         //Controller
+        function redLight() {
+            topColor = 'redLight';
+            middleColor = 'noLight';
+            bottomColor = 'noLight';
+            view();
+        }
+        function changeLight() {
+            topColor = 'redLight';
+            middleColor = 'yellowLight';
+            bottomColor = 'noLight';
+            view();
+        }
+        function greenLight() {
+            topColor = 'noLight'
+            middleColor = 'noLight';
+            bottomColor = 'greenLight';
+            view();
+        }
+        function toRedLight() {
+            topColor = 'noLight'
+            middleColor = 'yellowLight';
+            bottomColor = 'noLight';
+            view();
+        }
+        function autoLight() {
+            if (automationText == 'Auto' && automation == 'autoLight()') {
+                automationText = 'Avbryt'
+                automation = 'cancelAutoLight()'
+            }
+            redLight();
+            setTimeout(changeLight, 5000);
+            setTimeout(greenLight, 7000);
+            setTimeout(toRedLight, 12000);
+            setTimeout(autoLight, 17000);
+
+            view();
+        }
     </script>
 </body>
 
