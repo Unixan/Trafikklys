@@ -23,6 +23,7 @@
         let bottomColor = 'noLight';
         let automation = 'autoLight()';
         let automationText = 'Auto';
+        
         //View
         view();
         function view() {
@@ -69,18 +70,28 @@
             view();
         }
         function autoLight() {
-            if (automationText == 'Auto' && automation == 'autoLight()') {
+            if (automationText == 'Auto') {
                 automationText = 'Avbryt'
-                automation = 'cancelAutoLight()'
+                redLight();
+                setTimeout(changeLight, 5000);
+                setTimeout(greenLight, 7000);
+                setTimeout(toRedLight, 12000);
+                console.log(timedLights)
+                }
+                else{clearInterval}
             }
-            redLight();
-            setTimeout(changeLight, 5000);
-            setTimeout(greenLight, 7000);
-            setTimeout(toRedLight, 12000);
-            setTimeout(autoLight, 17000);
+            
+            // redLight();
+            // setTimeout(changeLight, 5000);
+            // setTimeout(greenLight, 7000);
+            // setTimeout(toRedLight, 12000);
+            // setTimeout(autoLight, 17000);
+            
+          
 
             view();
-        }
+        
+      
     </script>
 </body>
 
