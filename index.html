@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+
 <html>
 
 <head>
@@ -14,18 +11,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="body">
+<body class="body" onload="view()">
     <div id="app" class="main"></div>
     <script>
         //Model
         let topColor = 'noLight';
         let middleColor = 'noLight';
         let bottomColor = 'noLight';
-        let automation = 'autoLight()';
-        let automationText = 'Auto';
-        
+
         //View
-        view();
+
         function view() {
             document.getElementById("app").innerHTML = /*HTML*/`
                 <div class="house">
@@ -38,11 +33,8 @@
                     <div class="button" onclick="changeLight()">Bytt!</div>
                     <div class="button" onclick="greenLight()">Kjør!</div>
                     <div class="button" onclick="toRedLight()">Stopp snart!</div>
-                    <div class="button" onclick="${automation}">${automationText}</div>
-
-                </div>
-            
-    `
+                    <div class="button" onclick="autoLight()">Auto</div>
+                </div>`
         }
         //Controller
         function redLight() {
@@ -70,28 +62,13 @@
             view();
         }
         function autoLight() {
-            if (automationText == 'Auto') {
-                automationText = 'Avbryt'
-                redLight();
-                setTimeout(changeLight, 5000);
-                setTimeout(greenLight, 7000);
-                setTimeout(toRedLight, 12000);
-                console.log(timedLights)
-                }
-                else{clearInterval}
-            }
-            
-            // redLight();
-            // setTimeout(changeLight, 5000);
-            // setTimeout(greenLight, 7000);
-            // setTimeout(toRedLight, 12000);
-            // setTimeout(autoLight, 17000);
-            
-          
-
-            view();
-        
+            redLight();
+            setTimeout(changeLight, 5000);
+            setTimeout(greenLight, 7000);
+            setTimeout(toRedLight, 12000);
+        }
       
+
     </script>
 </body>
 
